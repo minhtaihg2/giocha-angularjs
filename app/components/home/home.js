@@ -1,14 +1,18 @@
-
 'use strict';
 
 /**
  * @ngdoc function
- * @name giochaClientApp.controller:MainCtrl
+ * @name giochaClientApp.controller:HomeCtrl
  * @description
- * # MainCtrl
+ * # HomeCtrl
  * Controller of the giochaClientApp
  */
-angular.module('giochaClientApp')
-  .controller('HomeCtrl', function () {
+angular
+  .module('giochaClientApp')
+  .controller('HomeCtrl', HomeCtrl);
 
-  });
+  HomeCtrl.$inject = ['$scope'];
+
+  function HomeCtrl($scope) {
+    console.log('HomeCtrl run');
+  }

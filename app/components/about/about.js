@@ -7,7 +7,13 @@
  * # AboutCtrl
  * Controller of the giochaClientApp
  */
-angular.module('giochaClientApp')
-  .controller('AboutCtrl', function () {
 
-  });
+angular
+  .module('giochaClientApp')
+  .controller('AboutCtrl', AboutCtrl);
+
+  AboutCtrl.$inject = ['$scope'];
+
+  function AboutCtrl($scope) {
+    console.log('AboutCtrl run');
+  }

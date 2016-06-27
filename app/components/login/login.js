@@ -1,7 +1,12 @@
 'use strict';
 
-angular.module('giochaClientApp')
-  .controller('LoginCtrl', ['$scope', '$state', 'toaster','$auth', function ($scope, $state, toaster,$auth) {
+angular
+  .module('giochaClientApp')
+  .controller('LoginCtrl', LoginCtrl);
+
+  LoginCtrl.$inject = ['$state','toaster','$scope','$auth'];
+
+  function LoginCtrl($state,toaster,$scope,$auth){
 
     /* jshint validthis: true */
 
@@ -19,16 +24,6 @@ angular.module('giochaClientApp')
         });
       } else {
 
-        /* // Waiting API
-        $auth.signup(user)
-          .then(function(response) {
-           //TODO: action!
-          })
-          .catch(function(response) {
-            //TODO: Handle errors here.
-          });
-        */
-
         if(user.username == 'taipham.it@gmail.com' && user.password == '123456') {
           $state.go('main.home');
         }else {
@@ -41,7 +36,6 @@ angular.module('giochaClientApp')
     }
 
     function twitter() {
-        toaster.pop('info', "Đăng nhập với twitter.", "Chắc năng đang được nâng cấp. Xin vui lòng thử lại sau!");
+      toaster.pop('info', "Đăng nhập với twitter.", "Chắc năng đang được nâng cấp. Xin vui lòng thử lại sau!");
     }
-
-  }]);
+  }
