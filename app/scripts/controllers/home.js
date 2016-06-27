@@ -1,3 +1,4 @@
+
 'use strict';
 
 /**
@@ -8,6 +9,6 @@
  * Controller of the giochaClientApp
  */
 angular.module('giochaClientApp')
-  .controller('MainCtrl', function () {
+  .controller('HomeCtrl', function () {
 
   });
