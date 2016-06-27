@@ -24,23 +24,22 @@ angular.module("giochaClientApp")
     $stateProvider
       .state('login', {
         url: "/login",
-        templateUrl: "views/login.html",
+        templateUrl: "components/login/login.html",
         controller: 'LoginCtrl',
         controllerAs : 'vm'
       })
       .state('main', {
         url: "/main",
-        templateUrl: "views/main.html",
-        controller: 'MainCtrl'
+        templateUrl: "layout/main.html"
       })
       .state('main.home', {
         url: "/home",
-        templateUrl: "views/home.html",
+        templateUrl: "components/home/home.html",
         controller: 'HomeCtrl'
       })
       .state('main.about', {
         url: "/about",
-        templateUrl: "views/about.html",
+        templateUrl: "components/about/about.html",
         controller: 'AboutCtrl',
         controllerAs: 'about'
       });

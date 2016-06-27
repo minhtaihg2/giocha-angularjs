@@ -23,8 +23,10 @@
       'toaster',
       'appSettings'
     ])
-    .run(['$state','$rootScope',function($state,$rootScope){
+    .run(['$state','$rootScope','appName',function($state,$rootScope,appName){
       $rootScope.$state = $state;
+      $rootScope.appName = appName;
+
     }]);
 
 })();
