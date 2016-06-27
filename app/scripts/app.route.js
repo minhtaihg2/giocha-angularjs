@@ -14,10 +14,10 @@ angular.module("giochaClientApp")
     //Default url should be redirect to login page or dashboard // fix login
     $urlRouterProvider.otherwise(function ($injector, $location) {
       if (! $location.$$url && settingsUrl.baseUrl.length < $location.$$absUrl.length) {
-        return '404';
+        return 'login';
       }
 
-      return $location.$$url ? '404' : '/users/setting';
+      return $location.$$url ? 'login' : '/users/setting';
     });
 
     // Now set up the states
