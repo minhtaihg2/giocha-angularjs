@@ -20,7 +20,8 @@
       'ngTouch',
       'ui.router',
       'satellizer',
-      'toaster'
+      'toaster',
+      'appSettings'
     ])
     .run(['$state','$rootScope',function($state,$rootScope){
       $rootScope.$state = $state;

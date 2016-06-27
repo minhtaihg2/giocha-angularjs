@@ -5,12 +5,21 @@
 'use strict';
 
 angular.module("giochaClientApp")
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider,$authProvider,settingsUrl) {
 
-    //
-    // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise("/login");
-    //
+
+    // Satellizer configuration that specifies which API
+    $authProvider.loginUrl = settingsUrl.baseApiUrl + 'v1/auth/login';
+
+    //Default url should be redirect to login page or dashboard // fix login
+    $urlRouterProvider.otherwise(function ($injector, $location) {
+      if (! $location.$$url && settingsUrl.baseUrl.length < $location.$$absUrl.length) {
+        return '404';
+      }
+
+      return $location.$$url ? '404' : '/users/setting';
+    });
+
     // Now set up the states
     $stateProvider
       .state('login', {
