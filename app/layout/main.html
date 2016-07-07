@@ -1,42 +1,33 @@
 
-<!-- Add your site or application content here -->
-<div class="header">
-  <div class="navbar navbar-default" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-
-        <a class="navbar-brand" ui-sref="main.home">{{appName}}</a>
-      </div>
-
-      <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-        <ul class="nav navbar-nav">
-          <li ui-sref-active="active"><a ui-sref="main.home">Home</a></li>
-          <li ui-sref-active="active"><a ui-sref="main.about">About</a></li>
-          <li><a ui-sref="login">Logout</a></li>
-        </ul>
-      </div>
+<!-- END PAGE SPINNER -->
+<!-- BEGIN HEADER -->
+<div data-ng-include="'layout/tpl/header.html'" data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top"> </div>
+<!-- END HEADER -->
+<div class="clearfix"> </div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+  <!-- BEGIN SIDEBAR -->
+  <div data-ng-include="'layout/tpl/sidebar.html'" data-ng-controller="SidebarController" class="page-sidebar-wrapper"> </div>
+  <!-- END SIDEBAR -->
+  <!-- BEGIN CONTENT -->
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <!-- BEGIN STYLE CUSTOMIZER(optional) -->
+      <div data-ng-include="'layout/tpl/theme-panel.html'" data-ng-controller="ThemePanelController" class="theme-panel hidden-xs hidden-sm"> </div>
+      <!-- END STYLE CUSTOMIZER -->
+      <!-- BEGIN ACTUAL CONTENT -->
+      <div ui-view class="fade-in-up"> </div>
+      <!-- END ACTUAL CONTENT -->
     </div>
   </div>
+  <!-- END CONTENT -->
+  <!-- BEGIN QUICK SIDEBAR -->
+  <a href="javascript:;" class="page-quick-sidebar-toggler">
+    <i class="icon-login"></i>
+  </a>
+  <div data-ng-include="'layout/tpl/quick-sidebar.html'" data-ng-controller="QuickSidebarController" class="page-quick-sidebar-wrapper"></div>
+  <!-- END QUICK SIDEBAR -->
 </div>
-
-<div class="container">
-  <div ui-view=""></div>
-</div>
-
-<div class="footer">
-  <div class="container">
-    <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-  </div>
-</div>
-
-
-
-
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<div data-ng-include="'layout/tpl/footer.html'" data-ng-controller="FooterController" class="page-footer"> </div>

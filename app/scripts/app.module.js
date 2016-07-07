@@ -23,9 +23,12 @@
       'toaster',
       'appSettings'
     ])
-    .run(['$state','$rootScope','appName',function($state,$rootScope,appName){
+    .run(['$state','$rootScope','appName','settingsProject',function($state,$rootScope,appName,settingsProject){
       $rootScope.$state = $state;
       $rootScope.appName = appName;
+      $rootScope.$state = $state; // state to be accessed from view
+      console.log(settingsProject,appName);
+      $rootScope.$settings = settingsProject; // state to be accessed from view
 
     }]);
 
