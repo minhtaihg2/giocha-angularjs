@@ -48,6 +48,13 @@ gioChaApp.config(function ($stateProvider, $urlRouterProvider, $authProvider, se
             templateUrl: "components/product/list/productList.html",
             controller: 'ProductCtrl',
             controllerAs: 'vm'
-        });
+        })
+
+    .state('main.createProduct', {
+        url: "/product/create",
+        templateUrl: "components/product/create/productCreate.html",
+        controller: 'ProductCreateCtrl',
+        controllerAs: 'vm'
+    });
 
 });

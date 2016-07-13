@@ -4,20 +4,20 @@
 
 "use strict";
 
-gioChaApp.controller('ProductCtrl', ProductCtrl);
+gioChaApp.controller('ProductCreateCtrl', ProductCreateCtrl);
 
 /**
  * Injecting service
  * @type {string[]}
  */
-ProductCtrl.$inject = ['$scope'];
+ProductCreateCtrl.$inject = ['$scope'];
 
 /**
  *
  * @param $scope
  * @constructor
  */
-function ProductCtrl($scope) {
+function ProductCreateCtrl($scope) {
     var vm = this;
 
     vm.getProductList = function () {
