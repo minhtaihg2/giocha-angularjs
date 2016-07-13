@@ -7,9 +7,7 @@
  * # HomeCtrl
  * Controller of the giochaClientApp
  */
-angular
-  .module('giochaClientApp')
-  .controller('HomeCtrl', HomeCtrl);
+gioChaApp.controller('HomeCtrl', HomeCtrl);
 
   HomeCtrl.$inject = ['$scope'];
 

@@ -1,8 +1,6 @@
 'use strict';
 
-angular
-  .module('giochaClientApp')
-  .controller('LoginCtrl', LoginCtrl);
+gioChaApp.controller('LoginCtrl', LoginCtrl);
 
   LoginCtrl.$inject = ['$state','toaster','$scope','$auth'];
 

@@ -4,8 +4,7 @@
 
 'use strict';
 
-angular.module("giochaClientApp")
-  .config(function ($stateProvider, $urlRouterProvider,$authProvider,settingsUrl) {
+gioChaApp.config(function ($stateProvider, $urlRouterProvider, $authProvider, settingsUrl) {
 
 
     // Satellizer configuration that specifies which API
@@ -13,35 +12,42 @@ angular.module("giochaClientApp")
 
     //Default url should be redirect to login page or dashboard // fix login
     $urlRouterProvider.otherwise(function ($injector, $location) {
-      if (! $location.$$url && settingsUrl.baseUrl.length < $location.$$absUrl.length) {
-        return 'login';
-      }
+        if (!$location.$$url && settingsUrl.baseUrl.length < $location.$$absUrl.length) {
+            return 'login';
+        }
 
-      return $location.$$url ? 'login' : '/users/setting';
+        return $location.$$url ? 'login' : '/users/setting';
     });
 
     // Now set up the states
     $stateProvider
-      .state('login', {
-        url: "/login",
-        templateUrl: "components/login/login.html",
-        controller: 'LoginCtrl',
-        controllerAs : 'vm'
-      })
-      .state('main', {
-        url: "/main",
-        templateUrl: "layout/main.html"
-      })
-      .state('main.home', {
-        url: "/home",
-        templateUrl: "components/home/home.html",
-        controller: 'HomeCtrl'
-      })
-      .state('main.about', {
-        url: "/about",
-        templateUrl: "components/about/about.html",
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      });
+        .state('login', {
+            url: "/login",
+            templateUrl: "components/login/login.html",
+            controller: 'LoginCtrl',
+            controllerAs: 'vm'
+        })
+        .state('main', {
+            url: "/main",
+            templateUrl: "layout/main.html"
+        })
+        .state('main.home', {
+            url: "/home",
+            templateUrl: "components/home/home.html",
+            controller: 'HomeCtrl'
+        })
+        .state('main.about', {
+            url: "/about",
+            templateUrl: "components/about/about.html",
+            controller: 'AboutCtrl',
+            controllerAs: 'about'
+        })
 
-  });
+        .state('main.product', {
+            url: "/product",
+            templateUrl: "components/product/list/productList.html",
+            controller: 'ProductCtrl',
+            controllerAs: 'vm'
+        });
+
+});

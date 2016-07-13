@@ -8,9 +8,7 @@
  * Controller of the giochaClientApp
  */
 
-angular
-  .module('giochaClientApp')
-  .controller('AboutCtrl', AboutCtrl);
+gioChaApp.controller('AboutCtrl', AboutCtrl);
 
   AboutCtrl.$inject = ['$scope'];
 

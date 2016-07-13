@@ -1,7 +1,6 @@
 "use strict";
 
-angular.module('giochaClientApp')
-  .factory('settings', ['$rootScope','settingsUrl', function ($rootScope,settingsUrl) {
+gioChaApp.factory('settings', ['$rootScope','settingsUrl', function ($rootScope,settingsUrl) {
     var _config = settingsUrl;
     var setting = {
       app: {
