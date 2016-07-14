@@ -19,7 +19,8 @@ var gioChaApp = angular.module('gioChaApp', [
     'ui.router',
     'satellizer',
     'toaster',
-    'appSettings'
+    'appSettings',
+    'highcharts-ng'
 ]);
 
 gioChaApp.run(['$state', '$rootScope', 'appName', 'settingsProject', function ($state, $rootScope, appName, settingsProject) {
