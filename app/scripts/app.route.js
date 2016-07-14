@@ -21,40 +21,45 @@ gioChaApp.config(function ($stateProvider, $urlRouterProvider, $authProvider, se
 
     // Now set up the states
     $stateProvider
-        .state('login', {
-            url: "/login",
-            templateUrl: "components/login/login.html",
-            controller: 'LoginCtrl',
-            controllerAs: 'vm'
-        })
-        .state('main', {
-            url: "/main",
-            templateUrl: "layout/main.html"
-        })
-        .state('main.home', {
-            url: "/home",
-            templateUrl: "components/home/home.html",
-            controller: 'HomeCtrl'
-        })
-        .state('main.about', {
-            url: "/about",
-            templateUrl: "components/about/about.html",
-            controller: 'AboutCtrl',
-            controllerAs: 'about'
-        })
+            .state('login', {
+                url: "/login",
+                templateUrl: "components/login/login.html",
+                controller: 'LoginCtrl',
+                controllerAs: 'vm'
+            })
+            .state('main', {
+                url: "/main",
+                templateUrl: "layout/main.html"
+            })
+            .state('main.home', {
+                url: "/home",
+                templateUrl: "components/home/home.html",
+                controller: 'HomeCtrl'
+            })
+            .state('main.about', {
+                url: "/about",
+                templateUrl: "components/about/about.html",
+                controller: 'AboutCtrl',
+                controllerAs: 'about'
+            })
+            .state('main.chart', {
+                url: "/chart",
+                templateUrl: "components/chart/chart.html",
+                controller: 'ChartCtrl',
+                controllerAs: 'chart'
+            })
+            .state('main.product', {
+                url: "/product",
+                templateUrl: "components/product/list/productList.html",
+                controller: 'ProductCtrl',
+                controllerAs: 'vm'
+            })
 
-        .state('main.product', {
-            url: "/product",
-            templateUrl: "components/product/list/productList.html",
-            controller: 'ProductCtrl',
-            controllerAs: 'vm'
-        })
-
-    .state('main.createProduct', {
-        url: "/product/create",
-        templateUrl: "components/product/create/productCreate.html",
-        controller: 'ProductCreateCtrl',
-        controllerAs: 'vm'
-    });
+            .state('main.createProduct', {
+                url: "/product/create",
+                templateUrl: "components/product/create/productCreate.html",
+                controller: 'ProductCreateCtrl',
+                controllerAs: 'vm'
+            });
 
 });
