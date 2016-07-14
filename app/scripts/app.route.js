@@ -8,7 +8,7 @@ gioChaApp.config(function ($stateProvider, $urlRouterProvider, $authProvider, se
 
 
     // Satellizer configuration that specifies which API
-    $authProvider.loginUrl = settingsUrl.baseApiUrl + 'v1/auth/login';
+    $authProvider.loginUrl = settingsUrl.baseApiUrl + '/auth';
 
     //Default url should be redirect to login page or dashboard // fix login
     $urlRouterProvider.otherwise(function ($injector, $location) {
@@ -55,6 +55,17 @@ gioChaApp.config(function ($stateProvider, $urlRouterProvider, $authProvider, se
         templateUrl: "components/product/create/productCreate.html",
         controller: 'ProductCreateCtrl',
         controllerAs: 'vm'
+    })
+	.state('main.orderList', {
+        url: "/order/list",
+        templateUrl: "components/order/list/orderList.html",
+        controller: 'OrderCtrl',
+        controllerAs: 'vm'
+    })
+    .state('main.orderCreate', {
+        url: "/order/create",
+        templateUrl: "components/order/create/orderCreate.html",
+        controller: 'OrderCreateCtrl',
+        controllerAs: 'vm'
     });
-
 });

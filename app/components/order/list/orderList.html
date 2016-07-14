@@ -1,0 +1,53 @@
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="index.html">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>Tables</span>
+        </li>
+    </ul>    
+</div>
+<h1 class="page-title"> Danh Sách Khách Hàng Đặt Bánh
+    <small>Giò Chả và ...</small>
+</h1>
+<div class="row">
+    <div class="col-md-12">        
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>Danh sách đặt bánh</div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                    <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                    <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                    <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-responsive">
+                    <table ng-if='vm.orderList.length > 0' class="table">
+                        <thead>
+                        <tr>
+                            <th> STT </th>
+                            <th> Tên </th>
+                            <th> Email </th>                                                        
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="order in vm.orderList">
+                            <td ng-bind="order.id"></td>
+                            <td ng-bind="order.name"></td>
+                            <td ng-bind="order.email"></td>
+                        </tr>                        
+                        </tbody>
+                    </table>
+                    <div class="text-center" ng-if='vm.orderList.length <= 0'> No Order Found</div>
+                </div>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>

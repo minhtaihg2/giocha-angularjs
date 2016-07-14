@@ -22,18 +22,23 @@ gioChaApp.controller('LoginCtrl', LoginCtrl);
         });
       } else {
 
-        if(user.username == 'taipham.it@gmail.com' && user.password == '123456') {
-          $state.go('main.home');
-        }else {
-          toaster.error({
-            title: 'Đăng nhập thất bại.',
-            body: 'Tài khoản hoặc mật khẩu không hợp lệ!'
-          });
-        }
+          var _credentials =  {
+              email:  user.username,
+              password: user.password
+          };
+        
+          $auth.login(_credentials).then(function(data) {
+              $state.go('main.home');
+          }, function(){
+            toaster.error({
+              title: 'Đăng nhập thất bại.',
+              body: 'Tài khoản hoặc mật khẩu không hợp lệ!'
+            });
+          });         
       }
     }
 
     function twitter() {
-      toaster.pop('info', "Đăng nhập với twitter.", "Chắc năng đang được nâng cấp. Xin vui lòng thử lại sau!");
+      toaster.pop('info', "Đăng nhập với twitter.", "Chức năng đang được nâng cấp. Xin vui lòng thử lại sau!");
     }
   }
