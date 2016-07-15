@@ -4,8 +4,8 @@
  * Base Service
  * TODO: Provide basic REST method for using in this app
  */
-gioChaApp.service('BaseService', ['$rootScope', '$http', '$auth',
-    '$state', '$q', '$filter', function ($rootScope, $http, $auth, $state, $q, $filter) {
+gioChaApp.service('BaseService', ['$rootScope', '$http', '$auth', 'toaster',
+    '$state', '$q', '$filter', function ($rootScope, $http, $auth, toaster, $state, $q, $filter) {
 
         /**
          *
@@ -110,4 +110,38 @@ gioChaApp.service('BaseService', ['$rootScope', '$http', '$auth',
                 return _defer.promise;
             }
         };
+
+        /**
+         *
+         * @param type
+         * @param params
+         */
+        this.toaster = function (type, params) {
+            if(params){
+                switch (type){
+                    case 'success':
+                        toaster.success({
+                            title: params.title,
+                            body: params.body
+                        });
+                        break;
+                    case 'error':
+                        toaster.error({
+                            title: params.title,
+                            body: params.body
+                        });
+                        break;
+                    case 'info':
+                        toaster.info({
+                            title: params.title,
+                            body: params.body
+                        });
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        };
+
     }]);
