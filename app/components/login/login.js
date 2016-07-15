@@ -28,7 +28,7 @@ gioChaApp.controller('LoginCtrl', LoginCtrl);
           };
         
           $auth.login(_credentials).then(function(response) {
-              $auth.setToken(response.token);
+              $auth.setToken(response.data.data.token);
 
               $state.go('main.home');
           }, function(){

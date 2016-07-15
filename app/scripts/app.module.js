@@ -20,16 +20,20 @@ var gioChaApp = angular.module('gioChaApp', [
     'satellizer',
     'toaster',
     'appSettings',
-    'highcharts-ng'
+    'highcharts-ng',
+    'ui.bootstrap'
 ]);
 
-gioChaApp.run(['$state', '$rootScope', 'appName', 'settingsProject', function ($state, $rootScope, appName, settingsProject) {
+gioChaApp.run(['$state', '$rootScope', 'appName', 'settingsProject', '$auth', function ($state, $rootScope, appName, settingsProject, $auth) {
     $rootScope.$state = $state;
     $rootScope.appName = appName;
-    $rootScope.$state = $state; // state to be accessed from view
-    console.log(settingsProject, appName);
+    $rootScope.$state = $state; // state to be accessed from view    
     $rootScope.$settings = settingsProject; // state to be accessed from view
 
+    $rootScope.logout = function () {
+        $auth.logout();
+        $state.go('login', {});
+    };
 }]);
 
 

@@ -19,12 +19,6 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="fa fa-map-pin"></i>Danh sách sản phẩm</div>
-                <div class="tools">
-                    <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-                    <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
-                    <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
-                    <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
-                </div>
             </div>
             <div class="portlet-body">
                 <div class="table-responsive">
@@ -35,6 +29,8 @@
                             <th> Tên sản phẩm</th>
                             <th> Giá </th>
                             <th> Mô tả </th>
+                            <th width="2%">  </th>
+                            <th width="2%">  </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -43,6 +39,15 @@
                             <td ng-bind="product.name"></td>
                             <td ng-bind="product.price"></td>
                             <td ng-bind="product.description"></td>
+                            <td>
+                                <a ui-sref="main.editProduct({id: product.id})" class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <button ng-click="vm.deleteProduct(product)" class="btn btn-primary btn-sm red">
+                                    <span class="glyphicon glyphicon-trash"></span></button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
