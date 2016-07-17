@@ -32,15 +32,34 @@
                         <thead>
                         <tr>
                             <th> STT </th>
-                            <th> Tên </th>
-                            <th> Email </th>                                                        
+                            <th> Khách hàng </th>
+                            <th> Ngày đặt </th>
+                            <th> Sản phẩm </th>
+                            <th> Ghi chú </th>
+                            <th> Sửa </th>
+                            <th> Xóa </th>                                                        
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="order in vm.orderList">
                             <td ng-bind="order.id"></td>
-                            <td ng-bind="order.name"></td>
-                            <td ng-bind="order.email"></td>
+                            <td ng-bind="order.customer || 'N/A'"></td>
+                            <td ng-bind="order.orderedAt | date:'dd / MM / yyyy'"></td>
+                            <td>
+                                <span style="display:block;" ng-repeat="item in order.Products">
+                                    {{item.name}} - Số Lượng {{item.orderProduct.quantity}} cái
+                                </span>
+                            </td>
+                            <td ng-bind="order.description"></td>
+                            <td>
+                                <a ui-sref="main.orderUpdate({id: order.id})" class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <button ng-click="vm.deleteOrder(order)" class="btn btn-primary btn-sm red">
+                                    <span class="glyphicon glyphicon-trash"></span></button>
+                            </td>
                         </tr>                        
                         </tbody>
                     </table>

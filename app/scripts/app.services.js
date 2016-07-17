@@ -22,7 +22,7 @@ gioChaApp.service('BaseService', ['$rootScope', '$http', '$auth', 'toaster',
                 $http({
                     method: 'GET',
                     url: _url,
-                    params: _params
+                    data: _params
                 }).then(
                     function (response) {
                         _defer.resolve(response.data);
@@ -32,7 +32,23 @@ gioChaApp.service('BaseService', ['$rootScope', '$http', '$auth', 'toaster',
                 return _defer.promise;
             }
         };
-
+        /**
+         *
+         * @param url
+         * @param params
+         * @returns {*}
+         */
+        this.save = function (url, params) {
+            if (url) {
+                if(params.id){
+                  console.log(params.id);
+                  var id = params.id;
+                  return this.update(url, params.id, params);
+                }
+                else
+                  return this.create(url, params);
+            }
+        };
         /**
          *
          * @param url
@@ -73,7 +89,7 @@ gioChaApp.service('BaseService', ['$rootScope', '$http', '$auth', 'toaster',
                 $http({
                     method: 'PUT',
                     url: _url,
-                    params: _params
+                    data: _params
                 }).then(
                     function (response) {
                         _defer.resolve(response.data);
@@ -100,7 +116,7 @@ gioChaApp.service('BaseService', ['$rootScope', '$http', '$auth', 'toaster',
                 $http({
                     method: 'DELETE',
                     url: _url,
-                    params: _params
+                    data: _params
                 }).then(
                     function (response) {
                         _defer.resolve(response.data);

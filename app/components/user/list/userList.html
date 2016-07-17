@@ -1,15 +1,15 @@
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="index.html">Trang chủ</a>
+            <a href="index.html">Home</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>Sản phẩm</span>
+            <span>Tables</span>
         </li>
     </ul>
 </div>
-<h1 class="page-title"> Danh sách sản phẩm
+<h1 class="page-title"> Danh Sách Khách Hàng
     <small>Giò Chả và ...</small>
 </h1>
 <div class="row">
@@ -18,45 +18,41 @@
         <div class="portlet box green">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-map-pin"></i>Danh sách sản phẩm</div>
+                    <i class="fa fa-cogs"></i>Danh sách khách hàng</div>
                 <div class="tools">
-                    <button ng-click="$state.go('main.createProduct');" class="btn btn-primary btn-sm yellow-casablanca">
+                    <button ng-click="$state.go('main.createUser');" class="btn btn-primary btn-sm yellow-casablanca">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </div>
             </div>
             <div class="portlet-body">
                 <div class="table-responsive">
-                    <table ng-if='vm.productList.length > 0' class="table">
+                    <table ng-if='user.UserList.length > 0' class="table">
                         <thead>
                         <tr>
                             <th> STT </th>
-                            <th> Tên sản phẩm</th>
-                            <th> Giá </th>
-                            <th> Mô tả </th>
-                            <th width="2%">  </th>
-                            <th width="2%">  </th>
+                            <th> Tên </th>
+                            <th> Email </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="product in vm.productList">
-                            <td ng-bind="product.id"></td>
-                            <td ng-bind="product.name"></td>
-                            <td ng-bind="product.price"></td>
-                            <td ng-bind="product.description"></td>
+                        <tr ng-repeat="u in user.UserList">
+                            <td ng-bind="u.id"></td>
+                            <td ng-bind="u.name"></td>
+                            <td ng-bind="u.email"></td>
                             <td>
-                                <a ui-sref="main.editProduct({id: product.id})" class="btn btn-primary btn-sm">
+                                <a ui-sref="main.editUser({id: u.id})" class="btn btn-primary btn-sm">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
                             </td>
                             <td>
-                                <button ng-click="vm.deleteProduct(product)" class="btn btn-primary btn-sm red">
+                                <button ng-click="user.deleteUser(u)" class="btn btn-primary btn-sm red">
                                     <span class="glyphicon glyphicon-trash"></span></button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <div class="text-center" ng-if='vm.productList.length <= 0'> No Order Found</div>
+                    <div class="text-center" ng-if='user.UserList.length <= 0'> No User Found</div>
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@ gioChaApp.config(function ($stateProvider, $urlRouterProvider, $authProvider, se
     });
 
     // Now set up the states
-    $stateProvider
+    $stateProvider      
             .state('login', {
                 url: "/login",
                 templateUrl: "components/login/login.html",
@@ -41,6 +41,24 @@ gioChaApp.config(function ($stateProvider, $urlRouterProvider, $authProvider, se
                 templateUrl: "components/about/about.html",
                 controller: 'AboutCtrl',
                 controllerAs: 'about'
+            })
+            .state('main.user', {
+                url: "/user",
+                templateUrl: "components/user/list/userList.html",
+                controller: 'UserCtrl',
+                controllerAs: 'user'
+            })
+            .state('main.createUser', {
+                url: "/user/create",
+                templateUrl: "components/user/form/userForm.html",
+                controller: 'UserFormCtrl',
+                controllerAs: 'userForm'
+            })
+            .state('main.editUser', {
+                url: "/user/edit/:id",
+                templateUrl: "components/user/form/userForm.html",
+                controller: 'UserFormCtrl',
+                controllerAs: 'userForm'
             })
             .state('main.chart', {
                 url: "/chart",
@@ -75,8 +93,14 @@ gioChaApp.config(function ($stateProvider, $urlRouterProvider, $authProvider, se
             })
             .state('main.orderCreate', {
                 url: "/order/create",
-                templateUrl: "components/order/create/orderCreate.html",
-                controller: 'OrderCreateCtrl',
+                templateUrl: "components/order/form/orderForm.html",
+                controller: 'OrderFormCtrl',
+                controllerAs: 'vm'
+            })
+            .state('main.orderUpdate', {
+                url: "/order/edit/:id",
+                templateUrl: "components/order/form/orderForm.html",
+                controller: 'OrderFormCtrl',
                 controllerAs: 'vm'
             });
 

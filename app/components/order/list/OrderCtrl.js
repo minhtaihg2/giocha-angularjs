@@ -10,15 +10,17 @@ gioChaApp.controller('OrderCtrl', OrderCtrl);
  * Injecting service
  * @type {string[]}
  */
-OrderCtrl.$inject = ['$scope', 'settingsUrl', 'BaseService'];
+OrderCtrl.$inject = ['$scope', 'settingsUrl', 'BaseService', 'ModalService', 'toaster'];
 
 /**
  *
  * @param $scope
  * @constructor
  */
-function OrderCtrl($scope, settingsUrl, BaseService) {
+function OrderCtrl($scope, settingsUrl, BaseService, ModalService, toaster) {
     var vm = this;
+
+    var _urlOrder = settingsUrl.baseApiUrl + '/orders';
 
     var _init = function(){
     	vm.getListOrder();
@@ -29,18 +31,15 @@ function OrderCtrl($scope, settingsUrl, BaseService) {
     * Get Oder List
     */
     vm.getListOrder = function(){
-    	var _url = settingsUrl.baseApiUrl + '/users';
-
-	     // var _param =  {
-	     //          token:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InZpZXRuaCIsImVtYWlsIjoiaG9uZ3ZpZXQxMTlAZ21haWwuY29tIiwicm9sZSI6MCwiY3JlYXRlZEF0IjoiMjAxNi0wNy0xM1QxMTo1NjoxMi4wMDBaIiwidXBkYXRlZEF0IjoiMjAxNi0wNy0xM1QwODoyNTozOS4wMDBaIiwiaWF0IjoxNDY4NDY2ODgzLCJleHAiOjE0Njg1NTMyODN9.t5nvBYACLByvOfEc920l5blciDqR0gKB06yROs2x68s'
-	     //    };
-
+    	var _url = settingsUrl.baseApiUrl + '/orders';
+	   
     	BaseService.get(_url).then(
 
     	//Success
     	function(response){
     		if(response.status === 'success'){
-    			vm.orderList = response.data; 
+    			vm.orderList = response.data;
+                console.log(response.data); 
     		}    		
     	},
 
@@ -49,6 +48,54 @@ function OrderCtrl($scope, settingsUrl, BaseService) {
     		console.log(error);
     	});  
     };
+
+    /**
+     * DELETE order
+     * @param order
+     */
+    vm.deleteOrder = function (order) {
+        if(order.id){
+
+            var modalOptions = {
+                closeButtonText: 'Hủy',
+                actionButtonText: 'Xóa',
+                actionButtonClass: 'btn-danger',
+                headerText: 'Xóa đơn hàng',
+                bodyText: 'Bạn có chắc chắn muốn xóa đơn hàng này?'
+            };
+
+            ModalService.showModal({}, modalOptions).then(function (result) {
+                BaseService.delete(_urlOrder, order.id, null).then(function (response) {
+                    if (response.status === 'success') {
+                        toaster.pop({
+                            type: 'success',
+                            title: 'Xóa đơn hàng',
+                            body: "Đơn hàng được xóa thành công.",
+                            showCloseButton: true,
+                            bodyOutputType: 'trustedHtml'
+                        });
+
+                        vm.getListOrder();
+                    } else {
+                        toaster.pop({
+                            type: 'error',
+                            title: 'Xóa đơn hàng',
+                            body: "Không thể xóa đơn hàng, Liên hệ anh Bách ruồi để biết thêm chi tiết",
+                            showCloseButton: true
+                        });
+                    }
+                }, function () {
+                    toaster.pop({
+                        type: 'error',
+                        title: 'Xóa đơn hàng',
+                        body: "Không thể xóa đơn hàng, Liên hệ anh Bách ruồi để biết thêm chi tiết",
+                        showCloseButton: true
+                    });
+                });
+            });
+        }
+    };
+
 
     _init();
 }

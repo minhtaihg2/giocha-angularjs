@@ -4,69 +4,88 @@
 
 "use strict";
 
-gioChaApp.controller('ProductFormCtrl', ProductFormCtrl);
+gioChaApp.controller('OrderFormCtrl', OrderFormCtrl);
 
 /**
  * Injecting service
  * @type {string[]}
  */
-ProductFormCtrl.$inject = ['$scope', 'settingsUrl', 'BaseService', '$stateParams', '$state'];
+OrderFormCtrl.$inject = ['$scope', 'settingsUrl', 'BaseService', '$stateParams', '$state'];
 
 /**
  *
  * @param $scope
  * @constructor
  */
-function ProductFormCtrl($scope, settingsUrl, BaseService, $stateParams, $state) {
+function OrderFormCtrl($scope, settingsUrl, BaseService, $stateParams, $state) {
     var vm = this;
     var _productUrl = settingsUrl.baseApiUrl + '/products';
+    var _orderUrl = settingsUrl.baseApiUrl + '/orders';
 
-    vm.currentProductId = ($stateParams.id) ? $stateParams.id : null;
+    vm.currentOrderId = ($stateParams.id) ? $stateParams.id : null;
 
     var _init = function () {
+        vm.getProducts();
+
         /**
          * Create product object
          * @type {{name: string, price: number, description: string}}
          */
-        vm.product = {
-            name: '',
-            price: 0,
-            description: ''
+        vm.order = {
+            productId: '',
+            quantity: '',
+            orderedAt: 0,
+            description: '',
+            customer: ''
         };
 
         //If we have product id in url. We should switch form mode is updating
-        if (vm.currentProductId) {
-            vm.getProductById(vm.currentProductId)
+        if (vm.currentOrderId) {
+            vm.getOrderById(vm.currentOrderId)
         }
 
-        vm.productOriginal = angular.copy(vm.product);
-
+        vm.orderOriginal = angular.copy(vm.order);
     };
 
     /**
-     * Create new product
+        
+    **/
+    vm.getProducts = function(){
+        BaseService.get(_productUrl).then(function(response){
+            if(response.status === "success"){
+                vm.productList = response.data;
+                console.log(vm.productList);
+            }
+        }, function(){
+
+        });
+    };
+
+    /**
+     * Action Form order
      * @param product
      */
-    vm.actionForm = function (product) {
-        if (product) {
+    vm.actionForm = function (order) {        
+        if (order) {
             /**
              *
              * @type {{name: *, price: (number|*), description: *}}
              * @private
              */
             var _params = {
-                name: product.name,
-                price: product.price,
-                description: product.description
+                customer: order.customer,
+                orderedAt: order.orderedAt,
+                products: JSON.stringify({"productId": order.productId,"quantity": order.quantity}),
+                description: order.description                
             };
 
             /**
              *
              */
-            if (vm.currentProductId) {
-                _updateProduct(vm.currentProductId, _params);
+            if (vm.currentOrderId) {
+                _updateOrder(vm.currentOrderId, _params);
             } else {
-                _createProduct(_params);
+                _createOrder(_params);
             }
         }
     };
@@ -76,11 +95,11 @@ function ProductFormCtrl($scope, settingsUrl, BaseService, $stateParams, $state)
      * @param _params
      * @private
      */
-    var _createProduct = function (_params) {
+    var _createOrder = function (_params) {
         /**
          * Call Service to create new product
          */
-        BaseService.create(_productUrl, _params).then(function (response) {
+        BaseService.create(_orderUrl, _params).then(function (response) {
                 //create success
                 if (response.status === 'success') {
                     var _paramsToaster = {
@@ -89,7 +108,7 @@ function ProductFormCtrl($scope, settingsUrl, BaseService, $stateParams, $state)
                     };
                     BaseService.toaster('success', _paramsToaster);
 
-                    $state.go('main.product');
+                    $state.go('main.orderList');
                 }
             },
             //create fail
@@ -108,11 +127,11 @@ function ProductFormCtrl($scope, settingsUrl, BaseService, $stateParams, $state)
      * @param params
      * @private
      */
-    var _updateProduct = function (id, params) {
+    var _updateOrder = function (id, params) {
         /**
          * Call service to update product
          */
-        BaseService.update(_productUrl, id, params).then(
+        BaseService.update(_orderUrl, id, params).then(
             //success
             function (response) {
                 if (response.status === 'success') {
@@ -139,13 +158,17 @@ function ProductFormCtrl($scope, settingsUrl, BaseService, $stateParams, $state)
      *
      * @param id
      */
-    vm.getProductById = function (id) {
+    vm.getOrderById = function (id) {        
         if (id) {
-            BaseService.get(_productUrl, id).then(function (response) {
+            BaseService.get(_orderUrl, id).then(function (response) {
                 if (response.status === 'success') {
-                    vm.product = response.data;
+                    vm.order = response.data;
 
-                    vm.productOriginal = angular.copy(vm.product);
+                    vm.order.orderedAt = new Date(response.data.orderedAt);
+                    vm.order.productId = parseInt(response.data.Products[0].id);
+                    vm.order.quantity = response.data.Products[0].orderProduct.quantity;
+                    
+                    vm.orderOriginal = angular.copy(vm.order);
                 } else {
                     var _paramsToaster = {
                         title: 'Lỗi',
@@ -163,7 +186,7 @@ function ProductFormCtrl($scope, settingsUrl, BaseService, $stateParams, $state)
      *
      */
     vm.resetForm = function () {
-        vm.product = angular.copy(vm.productOriginal);
+        vm.order = angular.copy(vm.orderOriginal);
     };
 
     _init();
