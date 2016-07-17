@@ -12,9 +12,6 @@ gioChaApp.controller('ChartCtrl', ChartCtrl);
 ChartCtrl.$inject = ['$scope', '$http', 'BaseService', 'settingsUrl'];
 function ChartCtrl($scope, $http, BaseService, settingsUrl) {
     //See: https://github.com/pablojim/highcharts-ng
-//    var myapp = angular.module('myapp', ["highcharts-ng"]);
-//    myapp.controller('myctrl', function ($scope) {
-
     var _urlOrders = settingsUrl.baseApiUrl + '/orders';
 
     /**
@@ -47,16 +44,11 @@ function ChartCtrl($scope, $http, BaseService, settingsUrl) {
 
 
     $scope.getChart = function () {
-
-
-        var dates = [
-            {"2016-07-13T17:00:01.000Z": 2000},
-            {"2016-07-13T17:00:01.000Z": 1200},
-            {"2016-08-18T17:00:01.000Z": 1300},
-            {"2016-07-14T17:00:01.000Z": 550},
-            {"2016-07-14T17:00:01.000Z": 1000}
-        ];
-
+        /**
+         * 
+         * @param {type} dates
+         * @returns sort date by date
+         */
         function calc(dates) {
             var response = {};
             dates.forEach(function (d) {
@@ -84,7 +76,6 @@ function ChartCtrl($scope, $http, BaseService, settingsUrl) {
                             if (response.status === 'success') {
                                 $scope.orders = response.data;
                                 var arr_data = [];
-
                                 $scope.orders.forEach(function (val, index, arr) {
                                     if (val.Products.length > 0) {
                                         var total = 0;
@@ -96,21 +87,17 @@ function ChartCtrl($scope, $http, BaseService, settingsUrl) {
                                         arr_data.push(object);
                                     }
                                 });
+                              // get date for chart 
                                 var arr_data2 = calc(arr_data);
-                                console.log(arr_data2);
-                              
                                 var arr_data3 = [];
                                 angular.forEach(arr_data2, function (item, key) {
-//                                     console.log(1111,item);
                                     angular.forEach(item, function (item2, key2) {
-//                                        console.log(1111,item2,key2)    
                                         var tempArray = [];
-                                        tempArray.push(Date.UTC(2016, parseInt(key) - 1, parseInt(key2)+1));
+                                        tempArray.push(Date.UTC(2016, parseInt(key) - 1, parseInt(key2) + 1));
                                         tempArray.push(item2)
                                         arr_data3.push(tempArray);
                                     })
                                 })
-//                                console.log(arr_data3);
                                 $scope.highchartsNG = {
                                     options: {
                                         chart: {
@@ -122,7 +109,6 @@ function ChartCtrl($scope, $http, BaseService, settingsUrl) {
                                             name: 'Tổng tiền đơn hàng',
                                             data: arr_data3
                                         },
-                                        
                                     ],
                                     xAxis: {
                                         type: 'datetime',
@@ -137,12 +123,12 @@ function ChartCtrl($scope, $http, BaseService, settingsUrl) {
                                     },
                                     yAxis: {
                                         title: {
-                                            text: 'Tong tieng(nghin VND)'
+                                            text: 'Tong tiền(nghìn VND)'
                                         },
                                         min: 0
                                     },
                                     title: {
-                                        text: 'Thong ke ban'
+                                        text: 'Thống kê bán theo ngày'
                                     },
                                     loading: false
                                 }
