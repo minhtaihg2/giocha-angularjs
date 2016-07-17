@@ -33,6 +33,7 @@ module.exports = function(config) {
       'bower_components/satellizer/satellizer.js',
       'bower_components/AngularJS-Toaster/toaster.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       // endbower
       'app/scripts/**/*.js',
       'test/mock/**/*.js',

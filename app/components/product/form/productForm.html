@@ -1,0 +1,52 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption font-green-haze">
+            <i class="icon-settings font-green-haze"></i>
+            <span ng-if="!vm.currentProductId" class="caption-subject bold uppercase">Tạo Sản Phẩm Mới</span>
+            <span ng-if="vm.currentProductId" class="caption-subject bold uppercase">Cập nhật Sản Phẩm Mới</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form ng-submit="vm.actionForm(vm.product)" name="productForm" role="form" class="form-horizontal">
+            <div class="form-body">
+                <div ng-class="{'has-error': productForm.productName.$invalid && productForm.productName.$dirty}" class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="product-name">Tên sản phẩm</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="productName" id="product-name" placeholder=""
+                               ng-model="vm.product.name"
+                               required>
+                        <div class="form-control-focus"></div>
+                        <span ng-if="productForm.productName.$invalid && productForm.productName.$dirty" class="help-block">Tên sản phẩm là bắt buộc.</span>
+                    </div>
+                </div>
+                <div ng-class="{'has-error': productForm.productPrice.$invalid && productForm.productPrice.$dirty}" class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="product-price">Giá sản phẩm</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="productPrice" id="product-price" placeholder=""
+                               ng-model="vm.product.price"
+                               required>
+                        <div class="form-control-focus"></div>
+                        <span ng-if="productForm.productPrice.$invalid && productForm.productPrice.$dirty" class="help-block">Giá sản phẩm là bắt buộc.</span>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="product-des">Mô tả sản phẩm</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" id="product-des" placeholder="" ng-model="vm.product.description"></textarea>
+                        <div class="form-control-focus"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="button" class="btn default">Cancel</button>
+                        <button type="submit" ng-disabled="productForm.$pristine || productForm.$invalid"
+                                class="btn blue">Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
