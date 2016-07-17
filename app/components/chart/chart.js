@@ -71,7 +71,7 @@ function ChartCtrl($scope, $http, BaseService, settingsUrl) {
                     response[month][day] = response[month][day] ? response[month][day] + d[k] : d[k];
                 }
             });
-//            console.log(response);
+            console.log(response);
             return response;
         }
 
@@ -98,18 +98,19 @@ function ChartCtrl($scope, $http, BaseService, settingsUrl) {
                                 });
                                 var arr_data2 = calc(arr_data);
                                 console.log(arr_data2);
+                              
                                 var arr_data3 = [];
                                 angular.forEach(arr_data2, function (item, key) {
 //                                     console.log(1111,item);
                                     angular.forEach(item, function (item2, key2) {
-
+//                                        console.log(1111,item2,key2)    
                                         var tempArray = [];
-                                        tempArray.push(Date.UTC(2016, parseInt(key) - 1, parseInt(key2)));
+                                        tempArray.push(Date.UTC(2016, parseInt(key) - 1, parseInt(key2)+1));
                                         tempArray.push(item2)
                                         arr_data3.push(tempArray);
                                     })
                                 })
-                                console.log(arr_data3);
+//                                console.log(arr_data3);
                                 $scope.highchartsNG = {
                                     options: {
                                         chart: {
@@ -118,32 +119,10 @@ function ChartCtrl($scope, $http, BaseService, settingsUrl) {
                                     },
                                     series: [
                                         {
-                                            name: 'banh giay',
+                                            name: 'Tổng tiền đơn hàng',
                                             data: arr_data3
                                         },
-                                        {
-                                            name: 'banh my cha',
-                                            data: [
-                                                [Date.UTC(2015, 9, 20), 200.000],
-                                                [Date.UTC(2015, 10, 4), 100.000],
-                                                [Date.UTC(2015, 10, 9), 700.000],
-                                                [Date.UTC(2015, 10, 27), 370.000],
-                                                [Date.UTC(2015, 11, 2), 400.000],
-                                                [Date.UTC(2015, 11, 26), 100.000],
-                                                [Date.UTC(2015, 11, 29), 600.000],
-                                                [Date.UTC(2016, 0, 11), 190.000],
-                                                [Date.UTC(2016, 0, 26), 700.000],
-                                                [Date.UTC(2016, 1, 3), 200.000],
-                                                [Date.UTC(2016, 1, 11), 200.000],
-                                                [Date.UTC(2016, 1, 25), 100.000],
-                                                [Date.UTC(2016, 2, 11), 800.000],
-                                                [Date.UTC(2016, 3, 11), 900.000],
-                                                [Date.UTC(2016, 4, 1), 500.000],
-                                                [Date.UTC(2016, 4, 5), 200.000],
-                                                [Date.UTC(2016, 4, 19), 500.000],
-                                                [Date.UTC(2016, 5, 3), 180.000]
-                                            ],
-                                        }
+                                        
                                     ],
                                     xAxis: {
                                         type: 'datetime',
