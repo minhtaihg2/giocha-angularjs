@@ -22,7 +22,7 @@ gioChaApp.service('BaseService', ['$rootScope', '$http', '$auth', 'toaster',
                 $http({
                     method: 'GET',
                     url: _url,
-                    params: _params
+                    data: _params
                 }).then(
                     function (response) {
                         _defer.resolve(response.data);
@@ -89,7 +89,7 @@ gioChaApp.service('BaseService', ['$rootScope', '$http', '$auth', 'toaster',
                 $http({
                     method: 'PUT',
                     url: _url,
-                    params: _params
+                    data: _params
                 }).then(
                     function (response) {
                         _defer.resolve(response.data);
@@ -116,7 +116,7 @@ gioChaApp.service('BaseService', ['$rootScope', '$http', '$auth', 'toaster',
                 $http({
                     method: 'DELETE',
                     url: _url,
-                    params: _params
+                    data: _params
                 }).then(
                     function (response) {
                         _defer.resolve(response.data);
