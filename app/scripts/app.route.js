@@ -20,7 +20,7 @@ gioChaApp.config(function ($stateProvider, $urlRouterProvider, $authProvider, se
     });
 
     // Now set up the states
-    $stateProvider
+    $stateProvider      
             .state('login', {
                 url: "/login",
                 templateUrl: "components/login/login.html",
