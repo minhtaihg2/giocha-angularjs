@@ -27,7 +27,9 @@ gioChaApp.controller('LoginCtrl', LoginCtrl);
               password: user.password
           };
         
-          $auth.login(_credentials).then(function(data) {
+          $auth.login(_credentials).then(function(response) {
+              $auth.setToken(response.data.data.token);
+
               $state.go('main.home');
           }, function(){
             toaster.error({
