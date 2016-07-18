@@ -42,6 +42,24 @@ gioChaApp.config(function ($stateProvider, $urlRouterProvider, $authProvider, se
                 controller: 'AboutCtrl',
                 controllerAs: 'about'
             })
+            .state('main.user', {
+                url: "/user",
+                templateUrl: "components/user/list/userList.html",
+                controller: 'UserCtrl',
+                controllerAs: 'user'
+            })
+            .state('main.createUser', {
+                url: "/user/create",
+                templateUrl: "components/user/form/userForm.html",
+                controller: 'UserFormCtrl',
+                controllerAs: 'userForm'
+            })
+            .state('main.editUser', {
+                url: "/user/edit/:id",
+                templateUrl: "components/user/form/userForm.html",
+                controller: 'UserFormCtrl',
+                controllerAs: 'userForm'
+            })
             .state('main.chart', {
                 url: "/chart",
                 templateUrl: "components/chart/chart.html",

@@ -32,7 +32,23 @@ gioChaApp.service('BaseService', ['$rootScope', '$http', '$auth', 'toaster',
                 return _defer.promise;
             }
         };
-
+        /**
+         *
+         * @param url
+         * @param params
+         * @returns {*}
+         */
+        this.save = function (url, params) {
+            if (url) {
+                if(params.id){
+                  console.log(params.id);
+                  var id = params.id;
+                  return this.update(url, params.id, params);
+                }
+                else
+                  return this.create(url, params);
+            }
+        };
         /**
          *
          * @param url
