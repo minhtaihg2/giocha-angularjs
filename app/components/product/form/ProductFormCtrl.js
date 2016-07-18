@@ -10,14 +10,14 @@ gioChaApp.controller('ProductFormCtrl', ProductFormCtrl);
  * Injecting service
  * @type {string[]}
  */
-ProductFormCtrl.$inject = ['$scope', 'settingsUrl', 'BaseService', '$stateParams'];
+ProductFormCtrl.$inject = ['$scope', 'settingsUrl', 'BaseService', '$stateParams', '$state'];
 
 /**
  *
  * @param $scope
  * @constructor
  */
-function ProductFormCtrl($scope, settingsUrl, BaseService, $stateParams) {
+function ProductFormCtrl($scope, settingsUrl, BaseService, $stateParams, $state) {
     var vm = this;
     var _productUrl = settingsUrl.baseApiUrl + '/products';
 
@@ -34,10 +34,12 @@ function ProductFormCtrl($scope, settingsUrl, BaseService, $stateParams) {
             description: ''
         };
 
+        //If we have product id in url. We should switch form mode is updating
         if (vm.currentProductId) {
             vm.getProductById(vm.currentProductId)
         }
 
+        vm.productOriginal = angular.copy(vm.product);
 
     };
 
@@ -86,6 +88,8 @@ function ProductFormCtrl($scope, settingsUrl, BaseService, $stateParams) {
                         body: 'Tạo sản phẩm mới thành công !'
                     };
                     BaseService.toaster('success', _paramsToaster);
+
+                    $state.go('main.product');
                 }
             },
             //create fail
@@ -117,6 +121,8 @@ function ProductFormCtrl($scope, settingsUrl, BaseService, $stateParams) {
                         body: 'Cập nhật sản phẩm mới thành công vượt sức mong đợi !'
                     };
                     BaseService.toaster('success', _paramsToaster);
+
+                    vm.productOriginal = angular.copy(response.data);
                 }
             },
             //fail
@@ -138,7 +144,8 @@ function ProductFormCtrl($scope, settingsUrl, BaseService, $stateParams) {
             BaseService.get(_productUrl, id).then(function (response) {
                 if (response.status === 'success') {
                     vm.product = response.data;
-                    console.log(vm.product)
+
+                    vm.productOriginal = angular.copy(vm.product);
                 } else {
                     var _paramsToaster = {
                         title: 'Lỗi',
@@ -150,6 +157,13 @@ function ProductFormCtrl($scope, settingsUrl, BaseService, $stateParams) {
                 console.log(error);
             });
         }
+    };
+
+    /**
+     *
+     */
+    vm.resetForm = function () {
+        vm.product = angular.copy(vm.productOriginal);
     };
 
     _init();

@@ -1,3 +1,18 @@
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="index.html">Trang chủ</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span ng-if="!vm.currentProductId">Thêm Sản phẩm</span>
+            <span ng-if="vm.currentProductId">Sửa Sản phẩm</span>
+        </li>
+    </ul>
+</div>
+<h1 ng-if="!vm.currentProductId" class="page-title">Thêm sản phẩm mới</h1>
+<h1 ng-if="vm.currentProductId" class="page-title">Sửa sản phẩm mới</h1>
+
 <div class="portlet light bordered">
     <div class="portlet-title">
         <div class="caption font-green-haze">
@@ -32,7 +47,7 @@
                 <div class="form-group form-md-line-input">
                     <label class="col-md-2 control-label" for="product-des">Mô tả sản phẩm</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="product-des" placeholder="" ng-model="vm.product.description"></textarea>
+                        <input class="form-control" id="product-des" placeholder="" ng-model="vm.product.description">
                         <div class="form-control-focus"></div>
                     </div>
                 </div>
@@ -40,9 +55,10 @@
             <div class="form-actions">
                 <div class="row">
                     <div class="col-md-offset-2 col-md-10">
-                        <button type="button" class="btn default">Cancel</button>
+                        <button ng-if="vm.currentProductId" type="button" class="btn default" ng-click="vm.resetForm();">Hủy</button>
+                        <button ng-if="!vm.currentProductId" type="button" class="btn default" ng-click="$state.go('main.product')">Hủy</button>
                         <button type="submit" ng-disabled="productForm.$pristine || productForm.$invalid"
-                                class="btn blue">Submit
+                                class="btn blue">ok
                         </button>
                     </div>
                 </div>
