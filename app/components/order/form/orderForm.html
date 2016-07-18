@@ -1,0 +1,81 @@
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="index.html">Trang chủ</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span ng-if="!vm.currentOrderId">Đặt bánh</span>
+            <span ng-if="vm.currentOrderId">Sửa đơn hàng</span>
+        </li>
+    </ul>
+</div>
+<h1 ng-if="!vm.currentOrderId" class="page-title">Đặt bánh</h1>
+<h1 ng-if="vm.currentOrderId" class="page-title">Sửa đơn hàng</h1>
+
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption font-green-haze">
+            <i class="icon-settings font-green-haze"></i>
+            <span ng-if="!vm.currentOrderId" class="caption-subject bold uppercase">Đặt bánh</span>
+            <span ng-if="vm.currentOrderId" class="caption-subject bold uppercase">Cập nhật đơn hàng</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form ng-submit="vm.actionForm(vm.order)" name="orderForm" role="form" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="order-des">Tên khách hàng</label>
+                    <div class="col-md-10">
+                        <input class="form-control" id="order-cus" placeholder="" ng-model="vm.order.customer">
+                        <div class="form-control-focus"></div>
+                    </div>
+                </div>
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="order-name">Ngày đặt bánh</label>
+                    <div class="col-md-10">                        
+                        <input type="date" class="form-control" name="orderName" id="order-name" placeholder=""
+                               ng-model="vm.order.orderedAt">
+                        <div class="form-control-focus"></div>                        
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="order-price">Sản phẩm</label>
+                    
+                    <div class="col-md-10">
+                        <select placeholder="Chọn sản phẩm" class="form-control"  ng-options="option.id as option.name for option in vm.productList" ng-model="vm.order.productId"><option value="">---Chọn sản phẩm---</option></select>   
+                        <div class="form-control-focus"></div>   
+                                          
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="order-des">Số lượng</label>
+                    <div class="col-md-10">
+                        <input type="number" class="form-control" id="order-des" placeholder="" ng-model="vm.order.quantity">
+                        <div class="form-control-focus"></div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="order-des">Ghi chú</label>
+                    <div class="col-md-10">
+                        <input class="form-control" id="order-des" placeholder="" ng-model="vm.order.description">
+                        <div class="form-control-focus"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button ng-if="vm.currentOrderId" type="button" class="btn default" ng-click="vm.resetForm();">Hủy</button>
+                        <button ng-if="!vm.currentOrderId" type="button" class="btn default" ng-click="$state.go('main.order')">Hủy</button>
+                        <button type="submit" ng-disabled="orderForm.$pristine || orderForm.$invalid"
+                                class="btn blue">ok
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
