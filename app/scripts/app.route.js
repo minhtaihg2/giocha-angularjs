@@ -75,8 +75,14 @@ gioChaApp.config(function ($stateProvider, $urlRouterProvider, $authProvider, se
             })
             .state('main.orderCreate', {
                 url: "/order/create",
-                templateUrl: "components/order/create/orderCreate.html",
-                controller: 'OrderCreateCtrl',
+                templateUrl: "components/order/form/orderForm.html",
+                controller: 'OrderFormCtrl',
+                controllerAs: 'vm'
+            })
+            .state('main.orderUpdate', {
+                url: "/order/edit/:id",
+                templateUrl: "components/order/form/orderForm.html",
+                controller: 'OrderFormCtrl',
                 controllerAs: 'vm'
             });
 
