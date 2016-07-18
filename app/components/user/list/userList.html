@@ -1,0 +1,61 @@
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="index.html">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>Tables</span>
+        </li>
+    </ul>
+</div>
+<h1 class="page-title"> Danh Sách Khách Hàng
+    <small>Giò Chả và ...</small>
+</h1>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>Danh sách khách hàng</div>
+                <div class="tools">
+                    <button ng-click="$state.go('main.createUser');" class="btn btn-primary btn-sm yellow-casablanca">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-responsive">
+                    <table ng-if='user.UserList.length > 0' class="table">
+                        <thead>
+                        <tr>
+                            <th> STT </th>
+                            <th> Tên </th>
+                            <th> Email </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="u in user.UserList">
+                            <td ng-bind="u.id"></td>
+                            <td ng-bind="u.name"></td>
+                            <td ng-bind="u.email"></td>
+                            <td>
+                                <a ui-sref="main.editUser({id: u.id})" class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <button ng-click="user.deleteUser(u)" class="btn btn-primary btn-sm red">
+                                    <span class="glyphicon glyphicon-trash"></span></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center" ng-if='user.UserList.length <= 0'> No User Found</div>
+                </div>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>
